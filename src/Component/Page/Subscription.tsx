@@ -59,14 +59,11 @@ const Subscription = () => {
   };
   return (
     <div className="flex w-full bg-white ">
-      {/* <Sidebar /> */}
       <div className="max-w-15xl flex-1 ">
-        {/* Header */}
         <div className="flex  items-center justify-between mb-5 gap-4">
           <div className="flex items-center">
             <h2 className="text-2xl font-semibold ">Subscription Details</h2>
           </div>
-          {/* </div> */}
         </div>
         <div className="flex justify-end mb-3">
           <Link to="/addsubscription">
@@ -76,7 +73,6 @@ const Subscription = () => {
             </Button>
           </Link>
         </div>
-        {/* Table */}
         <div className="bg-white shadow-sm rounded-sm overflow-hidden ">
           <Table className="text-center text-sm">
             <TableHeader className="bg-gray-200">

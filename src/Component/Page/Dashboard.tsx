@@ -1,4 +1,5 @@
-// import React from "react";
+import React from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   // CardAction,
@@ -37,10 +38,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Trash2, Upload, Check } from "lucide-react";
 const Dashboard = () => {
+
   const [uploadedFiles, setUploadedFiles] = useState([
     {
       name: "Biodata.pdf",
@@ -93,7 +94,7 @@ const Dashboard = () => {
     { name: "Jane Smith", email: "jane@example.com", password: "••••••••" },
     { name: "Alex Johnson", email: "alex@example.com", password: "••••••••" },
   ];
- 
+
 
 
 
@@ -108,66 +109,59 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="flex w-full bg-white  ">
-      {/* <Sidebar /> */}
-      <div className="max-w-15xl flex-1 ">
-        {/* <h2 className="text-2xl mb-5 font-semibold">Dashboard</h2> */}
-<div className="flex flex-wrap items-center justify-between mb-5 gap-4">
-          {/* Title and New Button */}
-          {/* <div className="flex items-center gap-4"> */}
-            <h2 className="text-2xl  font-semibold ">Dashboard</h2>
+    <div className="flex max-w-15xl flex-col w-full min-h-screen overflow-x-hidden">
+      <div className="flex-1   ">
+        <div className="flex flex-wrap items-center justify-between mb-5 gap-4">
+          <h2 className="text-2xl  font-semibold ">Dashboard</h2>
           {/* </div> */}
         </div>
-
-        <div className="grid grid-cols-3 gap-4 ">
-          {/* Card 2 */}
-
-          <Card className="relative  rounded-sm  border border-gray-200">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Card className="">
             <CardContent className="flex justify-between items-center p-4">
               <div>
-                <p className="text-xl mb-1 font-light">Total Users</p>
-                <div className="flex items-center gap-2">
+                <p className="text-lg text-gray-600">Total Users</p>
+                <div className="flex items-center gap-2 mt-1">
                   <ArrowUpRight className="text-green-500 w-4 h-4" />
-                  <span className="text-2xl font-bold">234%</span>
+                  <span className="text-xl font-bold">234%</span>
                 </div>
               </div>
-              <div className="w-10 h-10 rounded-full border-2 border-blue-500 flex items-center justify-center text-xs font-semibold text-blue-500">
+              <div className="w-12 h-12 rounded-full border-2 border-blue-500 flex items-center justify-center text-sm font-semibold text-blue-500">
                 58
               </div>
             </CardContent>
           </Card>
-
-          {/* TOTAL EXPENSES */}
-          <Card className="relative rounded-sm  border border-gray-200">
+          {/* Card 2 - Free Users */}
+          <Card className="w-auto">
             <CardContent className="flex justify-between items-center p-4">
               <div>
-                <p className="text-xl  mb-1 font-light">Free Users</p>
-                <div className="flex items-center gap-2">
+                <p className="text-lg text-gray-600">Free Users</p>
+                <div className="flex items-center gap-2 mt-1">
                   <ArrowDownRight className="text-red-500 w-4 h-4" />
-                  <span className="text-2xl font-bold">71%</span>
+                  <span className="text-xl font-bold">71%</span>
                 </div>
               </div>
-              <div className="w-10 h-10 rounded-full border-2 border-red-500 flex items-center justify-center text-xs font-semibold text-red-500">
+              <div className="w-12 h-12 rounded-full border-2 border-red-500 flex items-center justify-center text-sm font-semibold text-red-500">
                 62
               </div>
             </CardContent>
           </Card>
 
-          {/* COMPANY VALUE */}
-          <Card className="relative  rounded-sm border border-gray-200">
+          {/* Card 3 - Paid Users */}
+          <Card className="w-auto">
             <CardContent className="flex justify-between items-center p-4">
               <div>
-                <p className="text-xl font-light mb-1">Paid Users</p>
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl font-bold">$1.45M</span>
+                <p className="text-lg text-gray-600">Paid Users</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="text-xl font-bold">$1.45M</span>
                 </div>
               </div>
-              <div className="w-10 h-10 rounded-full border-2 border-yellow-500 flex items-center justify-center text-xs font-semibold text-yellow-500">
+              <div className="w-12 h-12 rounded-full border-2 border-yellow-500 flex items-center justify-center text-sm font-semibold text-yellow-500">
                 72
               </div>
             </CardContent>
           </Card>
         </div>
+
         <div>
           <h2 className="text-lg font-semibold mt-4 text-black mb-2">
             Subscription wise User Count
@@ -198,10 +192,10 @@ const Dashboard = () => {
           </div>
         </div>
 
-  
+
         <div>
           <h2 className="text-lg font-semibold mt-4 text-black mb-2">
-           Documents uploaded 
+            Documents uploaded
           </h2>
           <div className="flex bg-white border rounded-sm shadow-sm overflow-hidden max-w-4xl mx-auto">
             {/* Left upload section */}
@@ -247,7 +241,7 @@ const Dashboard = () => {
           <h2 className="text-lg font-semibold mt-6 mb-2  text-black">
             Feedback Analysis
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Left Card - Bar Chart */}
             <Card className=" rounded-sm">
               <CardHeader className="flex flex-row items-center justify-between">
@@ -282,11 +276,11 @@ const Dashboard = () => {
             </Card>
 
             {/* Right Card - Donut Chart */}
-            <Card className=" rounded-sm">
-              <CardHeader className="flex flex-row items-center justify-between ">
-                <CardTitle>Feedback Analysis</CardTitle>
+            <Card className="rounded-sm w-full">
+              <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                <CardTitle className="text-base sm:text-lg mb-3">Feedback Analysis</CardTitle>
                 <Select>
-                  <SelectTrigger className="w-[100px] h-8 text-sm">
+                  <SelectTrigger className="w-[120px] h-8 text-sm mb-4">
                     <SelectValue placeholder="Priority" />
                   </SelectTrigger>
                   <SelectContent>
@@ -297,34 +291,38 @@ const Dashboard = () => {
                   </SelectContent>
                 </Select>
               </CardHeader>
-              <CardContent className="flex flex-col items-center justify-center gap-4">
+
+              <CardContent className="flex flex-col items-center justify-center gap-4 w-full">
+                {/* Circular Indicator */}
                 <div className="w-[120px] h-[120px] rounded-full border-8 border-t-green-400 border-r-yellow-400 border-b-red-400 border-l-gray-300 relative flex items-center justify-center text-2xl font-bold">
                   116
                 </div>
-                <div className="flex gap-4 text-sm">
-                  <span className="flex items-center gap-1">
+
+                {/* Priority Legend */}
+                <div className="flex flex-wrap justify-center gap-4 text-sm w-full px-2 text-center">
+                  <span className="flex items-center gap-1 whitespace-nowrap">
                     <div className="w-2 h-2 bg-green-400 rounded-full" />
                     Low
                   </span>
-                  <span className="flex items-center gap-1">
+                  <span className="flex items-center gap-1 whitespace-nowrap">
                     <div className="w-2 h-2 bg-yellow-400 rounded-full" />
                     Medium
                   </span>
-                  <span className="flex items-center gap-1">
+                  <span className="flex items-center gap-1 whitespace-nowrap">
                     <div className="w-2 h-2 bg-red-400 rounded-full" />
                     High
                   </span>
-                  <span className="flex items-center gap-1">
+                  <span className="flex items-center gap-1 whitespace-nowrap">
                     <div className="w-2 h-2 bg-gray-300 rounded-full" />
                     None
                   </span>
                 </div>
               </CardContent>
             </Card>
+
           </div>
         </div>
         <div className="font-semibold leading-6">
-          {/* <CardTitle>Unsubscribed Users count</CardTitle> */}
           <h2 className="text-lg font-semibold mt-6 mb-2 text-black">
             Unsubscribed Users count
           </h2>
@@ -333,109 +331,43 @@ const Dashboard = () => {
               <h2 className="text-center text-xl font-semibold mb-6">
                 Unsubscribe Rate
               </h2>
-
-              <div className="flex items-end justify-between h-64 px-2 gap-3">
-                {/* Bar 1 */}
-                <div className="flex flex-col items-center w-[10%]">
+              <div className="flex flex-wrap justify-center items-end gap-4 sm:gap-2 px-2">
+                {[
+                  { height: "30px", value: "0.12%", label: "Cart Abandonment" },
+                  { height: "42.5px", value: "0.17%", label: "Product Abandonment" },
+                  { height: "52.5px", value: "0.21%", label: "Search Abandonment" },
+                  { height: "100px", value: "0.40%", label: "Post Purchase" },
+                  { height: "42.5px", value: "0.17%", label: "New Arrivals" },
+                  { height: "30px", value: "0.12%", label: "Price Decrease" },
+                  { height: "40px", value: "0.16%", label: "Back in Stock" },
+                  { height: "47.5px", value: "0.19%", label: "One Time Sends", light: true },
+                ].map((bar, idx) => (
                   <div
-                    className="w-full bg-blue-900 rounded-t-md flex justify-center items-end"
-                    style={{ height: "30px" }}
+                    key={idx}
+                    className="flex flex-col items-center flex-1 min-w-[80px] max-w-[120px]"
                   >
-                    <span className="text-white text-sm pb-1">0.12%</span>
+                    <div
+                      className={`w-full ${bar.light ? "bg-blue-500" : "bg-blue-900"} 
+              rounded-t-md flex justify-center items-end`}
+                      style={{ height: bar.height }}
+                    >
+                      <span className="text-white text-[10px] sm:text-sm pb-1">
+                        {bar.value}
+                      </span>
+                    </div>
+                    <p className="text-[10px] sm:text-[12px] text-center mt-1 truncate w-full max-w-[80px]">
+                      {bar.label}
+                    </p>
                   </div>
-                  <p className="text-[12px] text-center mt-1">
-                    Cart Abandonment
-                  </p>
-                </div>
-
-                {/* Bar 2 */}
-                <div className="flex flex-col items-center w-[10%]">
-                  <div
-                    className="w-full bg-blue-900 rounded-t-md flex justify-center items-end"
-                    style={{ height: "42.5px" }}
-                  >
-                    <span className="text-white text-sm pb-1">0.17%</span>
-                  </div>
-                  <p className="text-[12px] text-center mt-1">
-                    Product Abandonment
-                  </p>
-                </div>
-
-                {/* Bar 3 */}
-                <div className="flex flex-col items-center w-[10%]">
-                  <div
-                    className="w-full bg-blue-900 rounded-t-md flex justify-center items-end"
-                    style={{ height: "52.5px" }}
-                  >
-                    <span className="text-white text-sm pb-1">0.21%</span>
-                  </div>
-                  <p className="text-[12px] text-center mt-1">
-                    Search Abandonment
-                  </p>
-                </div>
-
-                {/* Bar 4 */}
-                <div className="flex flex-col items-center w-[10%]">
-                  <div
-                    className="w-full bg-blue-900 rounded-t-md flex justify-center items-end"
-                    style={{ height: "100px" }}
-                  >
-                    <span className="text-white text-sm pb-1">0.40%</span>
-                  </div>
-                  <p className="text-[12px] text-center mt-1">Post Purchase</p>
-                </div>
-
-                {/* Bar 5 */}
-                <div className="flex flex-col items-center w-[10%]">
-                  <div
-                    className="w-full bg-blue-900 rounded-t-md flex justify-center items-end"
-                    style={{ height: "42.5px" }}
-                  >
-                    <span className="text-white text-sm pb-1">0.17%</span>
-                  </div>
-                  <p className="text-[12px] text-center mt-1">New Arrivals</p>
-                </div>
-
-                {/* Bar 6 */}
-                <div className="flex flex-col items-center w-[10%]">
-                  <div
-                    className="w-full bg-blue-900 rounded-t-md flex justify-center items-end"
-                    style={{ height: "30px" }}
-                  >
-                    <span className="text-white text-sm pb-1">0.12%</span>
-                  </div>
-                  <p className="text-[12px] text-center mt-1">Price Decrease</p>
-                </div>
-
-                {/* Bar 7 */}
-                <div className="flex flex-col items-center w-[10%]">
-                  <div
-                    className="w-full bg-blue-900 rounded-t-md flex justify-center items-end"
-                    style={{ height: "40px" }}
-                  >
-                    <span className="text-white text-sm pb-1">0.16%</span>
-                  </div>
-                  <p className="text-[12px] text-center mt-1">Back in Stock</p>
-                </div>
-
-                {/* Bar 8 */}
-                <div className="flex flex-col items-center w-[10%]">
-                  <div
-                    className="w-full bg-blue-500 rounded-t-md flex justify-center items-end"
-                    style={{ height: "47.5px" }}
-                  >
-                    <span className="text-white text-sm pb-1">0.19%</span>
-                  </div>
-                  <p className="text-[12px] text-center mt-1">One Time Sends</p>
-                </div>
+                ))}
               </div>
-
-              <div className="text-sm text-center text-gray-600 mt-4">
+              <div className="text-xs sm:text-sm text-center text-gray-600 mt-4">
                 Y-Axis: 0% – 0.5%
               </div>
             </CardContent>
           </Card>
         </div>
+
       </div>
     </div>
   );

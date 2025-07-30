@@ -133,15 +133,13 @@ const Users = () => {
   };
 
   return (
-    <div className="flex w-full bg-white">
+    <div className=" bg-white">
       {/* <Sidebar /> */}
       <div className="max-w-15xl flex-2">
         {/* Title */}
         <div className="flex flex-wrap items-center justify-between mb-5 gap-4">
           <h2 className="text-2xl font-semibold">User Record</h2>
         </div>
-
-        {/* 🔍 Search + New */}
         <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-3 mb-3">
           <Input
             type="text"
@@ -159,73 +157,66 @@ const Users = () => {
             </Button>
           </Link>
         </div>
-
-        {/* 📋 Table */}
-        <div className="rounded-sm border overflow-hidden shadow-sm">
-          <Table className="text-center text-sm">
+        <div className="rounded-sm border shadow-sm w-full overflow-x-auto">
+          <Table className="min-w-[800px] text-sm text-center">
             <TableHeader className="bg-gray-200">
               <TableRow>
-                <TableHead className="py-4 px-2 text-left">Sr. No</TableHead>
-                <TableHead className="py-4 px-0">First Name</TableHead>
-                <TableHead className="py-4 px-0">Last Name</TableHead>
-                {/* <TableHead className="py-4 px-0">Username</TableHead> */}
-                <TableHead className="py-4 px-0">Email ID</TableHead>
-                <TableHead className="py-4 px-0">Action</TableHead>
+                <TableHead className="py-4 px-4 text-left">Sr. No</TableHead>
+                <TableHead className="py-4 px-2 text-left">First Name</TableHead>
+                <TableHead className="py-4 px-2 text-left">Last Name</TableHead>
+                <TableHead className="py-4 px-2 text-left">Email ID</TableHead>
+                <TableHead className="py-4 px-2 text-left">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-
-              {loading ? (<TableRow>
-                <TableCell colSpan={6} className="text-center text-black py-4">
-                  <div className="flex justify-center items-center py-20">
-                    <div className="animate-spin rounded-full h-10 w-10 border-4 border-t-[#8646f4] border-gray-200" />
-                  </div>
-                </TableCell>
-              </TableRow>) : (
-                filteredUsers.length > 0 ? (
-                  filteredUsers.map((user: any, idx) => (
-                    <TableRow key={idx}>
-                      <TableCell className="text-black text-left px-5">
-                        {(currentPage - 1) * usersPerPage + idx + 1}
-                      </TableCell>
-
-                      <TableCell className="text-black text-left py-4 px-0">
-                        {safeDecrypt(user.FirstName)}
-                      </TableCell>
-                      <TableCell className="text-black text-left py-4 px-0">
-                        {safeDecrypt(user.LastName)}
-                      </TableCell>
-                      {/* <TableCell className="text-black text-left py-4 px-0">
-                        {safeDecrypt(user.username)}
-                      </TableCell> */}
-                      <TableCell className="text-black text-left py-4 px-0">
-                        {safeDecrypt(user.EmailID)}
-                      </TableCell>
-                      <TableCell className="flex gap-3 text-lg text-black py-4 px-0">
-                        <button className="" onClick={() => handleEditClick(user)}>
-                          <Pencil className="w-4 h-4" />
-                        </button>
-                        <button onClick={() => handleDelete(user._id)}>
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </TableCell>
-                    </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={6} className="text-center text-black py-4">
-                      No users found.
+              {loading ? (
+                <TableRow>
+                  <TableCell colSpan={5} className="text-center text-black py-20">
+                    <div className="flex justify-center items-center">
+                      <div className="animate-spin rounded-full h-10 w-10 border-4 border-t-[#8646f4] border-gray-200" />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ) : filteredUsers.length > 0 ? (
+                filteredUsers.map((user: any, idx: number) => (
+                  <TableRow key={user._id}>
+                    <TableCell className="text-black text-left px-4">
+                      {(currentPage - 1) * usersPerPage + idx + 1}
+                    </TableCell>
+                    <TableCell className="text-black text-left py-4 px-2">
+                      {safeDecrypt(user.FirstName)}
+                    </TableCell>
+                    <TableCell className="text-black text-left py-4 px-2">
+                      {safeDecrypt(user.LastName)}
+                    </TableCell>
+                    <TableCell className="text-black text-left py-4 px-2">
+                      {safeDecrypt(user.EmailID)}
+                    </TableCell>
+                    <TableCell className="flex gap-3 text-black text-left py-4 px-2">
+                      <button onClick={() => handleEditClick(user)}>
+                        <Pencil className="w-4 h-4" />
+                      </button>
+                      <button onClick={() => handleDelete(user._id)}>
+                        <Trash2 className="w-4 h-4" />
+                      </button>
                     </TableCell>
                   </TableRow>
-                ))}
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={5} className="text-center text-black py-8">
+                    No users found.
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </div>
 
-        {/* ⬇️ Pagination + Page Size */}
-        <div className="flex flex-col md:flex-row justify-end items-center gap-3 mt-4 mb-4">
-          <Pagination className="w-fit items-end mr-2">
-            <PaginationContent>
+
+        <div className="flex flex-col sm:flex-col md:flex-row justify-between items-center gap-4 mt-4 mb-4 w-full flex-wrap">
+          <Pagination className="w-full md:w-fit justify-center md:justify-end">
+            <PaginationContent className="flex flex-wrap justify-center md:justify-end gap-1">
               <PaginationItem>
                 <PaginationPrevious
                   href="#"
@@ -267,8 +258,7 @@ const Users = () => {
               </PaginationItem>
             </PaginationContent>
           </Pagination>
-
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="text-black">Rows per page:</span>
             <Select
               value={usersPerPage.toString()}
@@ -288,6 +278,7 @@ const Users = () => {
             </Select>
           </div>
         </div>
+
       </div>
       {
         showModal && selectedUser && (
@@ -331,9 +322,7 @@ const Users = () => {
           </div>
         )
       }
-
     </div >
-  );
+  )
 };
-
 export default Users;
