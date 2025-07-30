@@ -30,7 +30,7 @@ function ReportsCustomerData() {
 
   return (
     <div className="flex h-screen bg-gray-50">
-      <Sidebar />
+      {/* <Sidebar /> */}
       <div className="flex-1 p-4 overflow-auto ">
                      <h2 className="text-2xl  text-black font-semibold mb-5">
           Customer Data

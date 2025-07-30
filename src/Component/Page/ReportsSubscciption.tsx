@@ -30,7 +30,7 @@ const ReportsSubscription = () => {
 
   return (
     <div className="flex h-screen  text-white">
-      <Sidebar />
+      {/* <Sidebar /> */}
       <div className="p-4 space-y-2 flex-1 overflow-auto">
         <h2 className="text-2xl  text-black font-semibold mb-5">
           Subscription Report

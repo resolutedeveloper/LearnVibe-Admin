@@ -1,5 +1,4 @@
 // import React from "react";
-import Sidebar from "./Sidebar";
 import {
   Card,
   // CardAction,
@@ -110,8 +109,8 @@ const Dashboard = () => {
 
   return (
     <div className="flex w-full bg-white  ">
-      <Sidebar />
-      <div className="max-w-7xl flex-1 p-4 ">
+      {/* <Sidebar /> */}
+      <div className="max-w-15xl flex-1 ">
         {/* <h2 className="text-2xl mb-5 font-semibold">Dashboard</h2> */}
 <div className="flex flex-wrap items-center justify-between mb-5 gap-4">
           {/* Title and New Button */}
@@ -199,73 +198,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Count of Documents uploaded so far
-        <div>
-          
-          <h3 className="text-xl   font-semibold mt-4 mb-2  text-black">
-            Count of Documents uploaded so far
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-            {stats.map((stat, i) => (
-              <Card key={i} className={`${stat.bg} text-white rounded-sm`}>
-                <CardContent className="p-6 flex flex-col items-center text-center">
-                  <span className="text-3xl font-bold">{stat.value}</span>
-                  <span className="text-sm mt-1 font-normal leading-5">
-                    {stat.label}
-                  </span>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          
-          <Card>
-            <CardContent className="p-6">
-             
-
-              <div className="flex flex-col lg:flex-row gap-6 font-normal">
-                <div className="w-full lg:w-1/2 h-[300px] ">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={chartData}
-                        dataKey="value"
-                        nameKey="name"
-                        innerRadius={60}
-                        outerRadius={100}
-                        paddingAngle={4}
-                      >
-                        {chartData.map((entry, index) => (
-                          <Cell
-                            key={`cell-${index}`}
-                            fill={COLORS[index % COLORS.length]}
-                          />
-                        ))}
-                      </Pie>
-                      <Tooltip />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </div>
-
-              
-                <div className="w-full lg:w-1/2 justify-center flex">
-                  <ul className="space-y-3  text-sm">
-                    {chartData.map((entry, index) => (
-                      <li key={index} className="flex items-center gap-2">
-                        <span
-                          className="inline-block w-4 h-4 rounded-full"
-                          style={{
-                            backgroundColor: COLORS[index % COLORS.length],
-                          }}
-                        ></span>
-                        <span>{entry.name}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div> */}
+  
         <div>
           <h2 className="text-lg font-semibold mt-4 text-black mb-2">
            Documents uploaded 
@@ -280,7 +213,6 @@ const Dashboard = () => {
                 Browse
               </Button>
             </div>
-
             {/* Right file list section */}
             <div className="w-1/2 p-6 space-y-4 overflow-y-auto">
               {uploadedFiles.map((file, index) => (

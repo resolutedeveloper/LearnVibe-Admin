@@ -24,7 +24,7 @@ const Reportscustomerusagedata = () => {
 
   return (
     <div className="flex h-screen bg-white">
-      <Sidebar />
+      {/* <Sidebar /> */}
       <div className="flex-1 p-4 overflow-auto">
         <div className="flex items-center mb-5">
             <h2 className="text-2xl  font-semibold">Customer Usage Data</h2>
