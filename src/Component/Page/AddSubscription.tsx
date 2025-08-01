@@ -8,7 +8,6 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
-import Sidebar from "./Sidebar"
 import { addSubscription, updateSubscriptionAPI } from "@/lib/api"
 import { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
@@ -104,7 +103,7 @@ const AddSubscription = () => {
           setError(res.message || "Failed to update subscription.");
         }
       }
-      // setTimeout(() => navigate("/subscription"), 1500);
+      setTimeout(() => navigate("/subscription"), 1500);
     } catch (err) {
       setError(`Failed to ${editMode ? "update" : "add"} subscription. Please try again.`);
     }
@@ -112,17 +111,14 @@ const AddSubscription = () => {
 
 
   return (
-    <div className="flex min-h-screen bg-white">
+    <div className="flex ">
       {/* <Sidebar /> */}
-
       <div className="flex-1">
         <div className="flex flex-wrap mb-5 gap-4">
           <h2 className="text-2xl font-semibold">Add Subscription</h2>
         </div>
-
         <Card className="w-full shadow-sm rounded-sm">
           <CardHeader />
-
           <CardContent>
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Left Side */}
@@ -137,7 +133,6 @@ const AddSubscription = () => {
                     onChange={handleChange}
                   />
                 </div>
-
                 <div>
                   <Label htmlFor="Price">Charges/Month (₹)</Label>
                   <Input
@@ -148,7 +143,6 @@ const AddSubscription = () => {
                     onChange={handleChange}
                   />
                 </div>
-
                 <div>
                   <Label htmlFor="NumOfDocuments">Number of Documents Allowed</Label>
                   <Input
@@ -159,7 +153,6 @@ const AddSubscription = () => {
                     onChange={handleChange}
                   />
                 </div>
-
                 <div>
                   <Label htmlFor="NoOfPages">Pages Per Document</Label>
                   <Input
@@ -170,7 +163,6 @@ const AddSubscription = () => {
                     onChange={handleChange}
                   />
                 </div>
-
                 <div>
                   <Label htmlFor="Duration">Duration (Months)</Label>
                   <Input
@@ -182,7 +174,6 @@ const AddSubscription = () => {
                   />
                 </div>
               </div>
-
               {/* Right Side */}
               <div className="space-y-4">
                 <div>
@@ -195,7 +186,6 @@ const AddSubscription = () => {
                     onChange={handleChange}
                   />
                 </div>
-
                 <div>
                   <Label htmlFor="NumOfQuiz">Allowed Number of Quizzes</Label>
                   <Input
@@ -206,7 +196,6 @@ const AddSubscription = () => {
                     onChange={handleChange}
                   />
                 </div>
-
                 {/* <div>
                   <Label htmlFor="NumberOfQuest">Questions Per Quiz</Label>
                   <Input

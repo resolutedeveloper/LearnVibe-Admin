@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "./Sidebar";
 import {
   Table,
   TableBody,
@@ -133,7 +132,7 @@ const Users = () => {
   };
 
   return (
-    <div className=" bg-white">
+    <div className=" ">
       {/* <Sidebar /> */}
       <div className="max-w-15xl flex-2">
         {/* Title */}
