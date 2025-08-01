@@ -253,16 +253,16 @@ const Subscription = () => {
         {/* Table - Hidden on mobile */}
         <div className="hidden md:block">
           <div className=" shadow-sm rounded-sm overflow-x-auto">
-            <Table className="text-center text-sm min-w-[900px]">
+            <Table className="text-left text-sm min-w-[900px]">
               <TableHeader className="">
-                <TableRow>
+                <TableRow className="">
                   <TableHead className="py-5 px-3">#</TableHead>
                   <TableHead className="py-5 px-0">Subscription<br />Title</TableHead>
                   <TableHead className="py-5 px-0">Charges<br />Month</TableHead>
                   <TableHead className="py-5 px-0">Documents<br />Allowed</TableHead>
                   <TableHead className="py-5 px-0">Pages<br />Document</TableHead>
-                  <TableHead className="py-5 px-0">Allowed<br />Formats</TableHead>
-                  <TableHead className="py-5 px-0">Quizzes<br />Allowed</TableHead>
+                  <TableHead className="py-5 px-0 text-left">Allowed<br />Formats</TableHead>
+                  <TableHead className="py-5 px-0 text-left" >Quizzes<br />Allowed</TableHead>
                   <TableHead className="py-5 px-0">Questions<br />Quiz</TableHead>
                   <TableHead className="py-5 px-0">Difficulty<br />Level</TableHead>
                   <TableHead className="py-5 px-0">Action</TableHead>
