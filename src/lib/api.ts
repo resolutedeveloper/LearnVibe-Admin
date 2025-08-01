@@ -2,10 +2,15 @@ import axiosInstance from "./axios";
 import type { login, otp, updateUser, verifyOtp } from "./types";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-export const getUsers = async (token: string, page: number, limit: number) => {
+export const getUsers = async (
+  token: string,
+  page: number,
+  limit: number,
+  search: string
+) => {
   try {
     const response = await axiosInstance.get(
-      `${API_BASE_URL}/admin/get-user?limit=${limit}&page=${page}`,
+      `${API_BASE_URL}/admin/get-user?limit=${limit}&page=${page}&search=${search}`,
       {
         headers: {
           "Content-Type": "application/json",

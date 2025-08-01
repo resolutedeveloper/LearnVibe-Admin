@@ -39,15 +39,16 @@ const Users = () => {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState<any>(null);
+  // const [searchQuery, setSearchQuery] = useState("");
 
   const GetUsers = async (page = currentPage, limit = usersPerPage) => {
     setLoading(true);
     try {
-      const res = await getUsers(token, page, limit);
+      const encryptedSearch = searchQuery.trim() ? EncryptFE(searchQuery.trim()) : "";
+      const res = await getUsers(token, page, limit, encryptedSearch);
       if (res.status === "success") {
         setApiUsers(res.users || []);
         setTotalPages(res.totalPages || 1);
-        setLoading(false);
       }
     } catch (error) {
       console.error("Error fetching users", error);
@@ -58,9 +59,11 @@ const Users = () => {
 
 
 
+
   useEffect(() => {
     GetUsers(currentPage, usersPerPage);
   }, [currentPage, usersPerPage]);
+
 
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
@@ -77,12 +80,12 @@ const Users = () => {
   };
 
   // If you want search to happen on the frontend
-  const filteredUsers = apiUsers.filter((user: any) => {
-    const fullText = `${safeDecrypt(user.FirstName)} ${safeDecrypt(
-      user.LastName
-    )} ${safeDecrypt(user.EmailID)}`.toLowerCase();
-    return fullText.includes(searchQuery.toLowerCase());
-  });
+  // const filteredUsers = apiUsers.filter((user: any) => {
+  //   const fullText = `${safeDecrypt(user.FirstName)} ${safeDecrypt(
+  //     user.LastName
+  //   )} ${safeDecrypt(user.EmailID)}`.toLowerCase();
+  //   return fullText.includes(searchQuery.toLowerCase());
+  // });
 
 
   const handleDelete = async (id: string) => {
@@ -115,7 +118,6 @@ const Users = () => {
   };
   const handleUpdateSubmit = async () => {
     const payload: any = {
-      // _id: selectedUser._id,
       FirstName: EncryptFE(selectedUser.FirstName),
       LastName: EncryptFE(selectedUser.LastName),
       EmailID: EncryptFE(selectedUser.EmailID),
@@ -140,22 +142,37 @@ const Users = () => {
           <h2 className="text-2xl font-semibold">User Record</h2>
         </div>
         <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-3 mb-3">
-          <Input
-            type="text"
-            placeholder="Search users..."
-            value={searchQuery}
-            onChange={(e) => {
-              setSearchQuery(e.target.value);
-              setCurrentPage(1);
-            }}
-            className="bg-white text-black rounded-sm w-full sm:w-64"
-          />
+          <div className="flex gap-2 w-full sm:w-auto">
+            <Input
+              type="text"
+              placeholder="Search  FristName..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="bg-white text-black rounded-sm w-full sm:w-64"
+            />
+            <Button
+              onClick={() => {
+                setCurrentPage(1);
+                GetUsers(1, usersPerPage);
+                setSearchQuery(""); // Only clear after a real search
+              }}
+              // disabled={!searchQuery.trim()}
+              className={`bg-[rgb(134,70,244)] text-white rounded-sm px-4 
+                }`}
+            >
+              Search
+            </Button>
+
+
+          </div>
+
           <Link to="/newusers">
             <Button className="bg-[rgb(134,70,244)] font-normal text-white px-6 py-2 rounded-sm">
               New
             </Button>
           </Link>
         </div>
+
         <div className="rounded-sm border shadow-sm w-full overflow-x-auto">
           <Table className="min-w-[800px] text-sm text-center">
             <TableHeader className="bg-gray-200">
@@ -176,8 +193,8 @@ const Users = () => {
                     </div>
                   </TableCell>
                 </TableRow>
-              ) : filteredUsers.length > 0 ? (
-                filteredUsers.map((user: any, idx: number) => (
+              ) : apiUsers.length > 0 ? (
+                apiUsers.map((user: any, idx: number) => (
                   <TableRow key={user._id}>
                     <TableCell className="text-black text-left px-4">
                       {(currentPage - 1) * usersPerPage + idx + 1}
@@ -193,10 +210,10 @@ const Users = () => {
                     </TableCell>
                     <TableCell className="flex gap-3 text-black text-left py-4 px-2">
                       <button onClick={() => handleEditClick(user)}>
-                        <Pencil className="w-4 h-4" />
+                        <Pencil className="w-4 h-4 text-blue-500" />
                       </button>
                       <button onClick={() => handleDelete(user._id)}>
-                        <Trash2 className="w-4 h-4" />
+                        <Trash2 className="w-4 h-4 text-red-500" />
                       </button>
                     </TableCell>
                   </TableRow>

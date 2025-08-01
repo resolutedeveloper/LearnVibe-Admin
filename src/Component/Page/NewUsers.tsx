@@ -6,7 +6,35 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
 import { addUser } from "@/lib/api";
 import { EncryptFE } from "@/lib/encrypt";
-
+import { CheckCircle, XCircle } from "lucide-react";
+// import { passwordCriteria } from "@/constants/passwordCriteria";
+import { useNavigate } from "react-router-dom";
+export const passwordCriteria = [
+  { label: "Minimum 8 Characters", check: (pwd: string) => pwd.length >= 8 },
+  { label: "Minimum 1 Capital Letter", check: (pwd: string) => /[A-Z]/.test(pwd) },
+  { label: "Minimum 1 Small Letter", check: (pwd: string) => /[a-z]/.test(pwd) },
+  { label: "Minimum 1 Special Character", check: (pwd: string) => /[^A-Za-z0-9]/.test(pwd) },
+  { label: "Minimum 1 Number", check: (pwd: string) => /[0-9]/.test(pwd) },
+];
+const PasswordStrengthChecker = (password: any) => {
+  return (
+    <div className="grid gap-1 text-sm text-gray-600 mt-2">
+      {passwordCriteria.map((criterion, index) => {
+        const passed = criterion.check(password);
+        return (
+          <div key={index} className="flex justify-between items-center">
+            <span>{criterion.label}</span>
+            {passed ? (
+              <CheckCircle className="text-green-500 w-4 h-4" />
+            ) : (
+              <XCircle className="text-red-500 w-4 h-4" />
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 const NewUsers = ({ isUpdate = false }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -15,6 +43,7 @@ const NewUsers = ({ isUpdate = false }) => {
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const navigate = useNavigate()
   const [errors, setErrors] = useState({
     firstName: "",
     email: "",
@@ -105,6 +134,8 @@ const NewUsers = ({ isUpdate = false }) => {
       setPassword("");
       setContact("");
       setAddress("");
+      navigate("/users")
+
     } catch (error: any) {
       const errorMsg =
         error?.response?.data?.message || error?.message || "Something went wrong.";
@@ -202,7 +233,10 @@ const NewUsers = ({ isUpdate = false }) => {
                   {errors.password && (
                     <p className="text-sm text-red-600 mt-1">{errors.password}</p>
                   )}
+
+                  {password && <PasswordStrengthChecker password={password} />}
                 </div>
+
 
                 <div>
                   <Label htmlFor="address">Address</Label>
