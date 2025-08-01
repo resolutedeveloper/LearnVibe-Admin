@@ -353,7 +353,7 @@ const Subscription = () => {
                     className="cursor-pointer text-blue-600 hover:text-blue-800"
                     onClick={() => handleEdit(sub)}
                   >
-                    <Pencil className=" w-4 h-4 cursor-pointer" />
+                    <Pencil className="w-4 h-4 cursor-pointer" />
                   </Button>
                   <Button
                     variant="ghost"
@@ -363,6 +363,8 @@ const Subscription = () => {
                   >
                     <Trash2 className="w-4 h-4" />
                   </Button>
+
+
                 </div>
               </div>
             ))

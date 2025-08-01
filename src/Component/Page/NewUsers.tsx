@@ -64,12 +64,12 @@ const NewUsers = ({ isUpdate = false }) => {
     let isValid = true;
 
     if (!firstName.trim()) {
-      newErrors.firstName = "First name is required.";
+      newErrors.firstName = "Please enter your name";
       isValid = false;
     }
 
     if (!email.trim()) {
-      newErrors.email = "Email is required.";
+      newErrors.email = " Please enter a valid E-mail";
       isValid = false;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       newErrors.email = "Please enter a valid email address.";
@@ -77,7 +77,7 @@ const NewUsers = ({ isUpdate = false }) => {
     }
 
     if (!password.trim()) {
-      newErrors.password = "Password is required.";
+      newErrors.password = "Please enter your password";
       isValid = false;
     } else if (
       !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,100}$/.test(password)

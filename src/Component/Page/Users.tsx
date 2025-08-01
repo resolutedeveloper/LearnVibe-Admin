@@ -209,12 +209,14 @@ const Users = () => {
                       {safeDecrypt(user.EmailID)}
                     </TableCell>
                     <TableCell className="flex gap-3 text-black text-left py-4 px-2">
-                      <button onClick={() => handleEditClick(user)}>
+                      <Button variant="ghost"
+                        size="icon" onClick={() => handleEditClick(user)}>
                         <Pencil className="w-4 h-4 text-blue-500" />
-                      </button>
-                      <button onClick={() => handleDelete(user._id)}>
+                      </Button>
+                      <Button variant="ghost"
+                        size="icon" onClick={() => handleDelete(user._id)}>
                         <Trash2 className="w-4 h-4 text-red-500" />
-                      </button>
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))
