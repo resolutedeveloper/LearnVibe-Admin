@@ -255,7 +255,7 @@ const Subscription = () => {
           <div className=" shadow-sm rounded-sm overflow-x-auto">
             <Table className="text-left text-sm min-w-[900px]">
               <TableHeader className="">
-                <TableRow className="">
+                <TableRow className="bg-gray-200 hover:bg-gray-200">
                   <TableHead className="py-5 px-3">#</TableHead>
                   <TableHead className="py-5 px-0">Subscription<br />Title</TableHead>
                   <TableHead className="py-5 px-0">Charges<br />Month</TableHead>
@@ -350,10 +350,10 @@ const Subscription = () => {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="text-blue-600 hover:text-blue-800"
+                    className="cursor-pointer text-blue-600 hover:text-blue-800"
                     onClick={() => handleEdit(sub)}
                   >
-                    <Pencil className="w-4 h-4" />
+                    <Pencil className=" w-4 h-4 cursor-pointer" />
                   </Button>
                   <Button
                     variant="ghost"
