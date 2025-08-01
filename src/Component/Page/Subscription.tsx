@@ -283,7 +283,7 @@ const Subscription = () => {
                       <TableRow key={sub.ID}>
                         <TableCell className="py-4 px-3">{index + 1}</TableCell>
                         <TableCell>{sub.SubscriptionTitle}</TableCell>
-                        <TableCell>${sub.Price}</TableCell>
+                        <TableCell>€{sub.Price}</TableCell>
                         <TableCell>{sub.NumOfDocuments}</TableCell>
                         <TableCell>{sub.NoOfPages}</TableCell>
                         <TableCell>{sub.AllowedFormats}</TableCell>
@@ -339,7 +339,7 @@ const Subscription = () => {
               >
                 <div className="font-semibold text-lg">{sub.SubscriptionTitle}</div>
                 <hr />
-                <div><strong>Charges/Month:</strong> ${sub.Price}</div>
+                <div><strong>Charges/Month:</strong> €{sub.Price}</div>
                 <div><strong>Documents Allowed:</strong> {sub.NumOfDocuments}</div>
                 <div><strong>Pages/Document:</strong> {sub.NoOfPages}</div>
                 <div><strong>Allowed Formats:</strong> {sub.AllowedFormats}</div>

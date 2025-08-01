@@ -151,7 +151,7 @@ const Dashboard = () => {
               <div>
                 <p className="text-lg text-gray-600">Paid Users</p>
                 <div className="flex items-center gap-2 mt-1">
-                  <span className="text-xl font-bold">$1.45M</span>
+                  <span className="text-xl font-bold">€1.45M</span>
                 </div>
               </div>
               <div className="w-12 h-12 rounded-full border-2 border-yellow-500 flex items-center justify-center text-sm font-semibold text-yellow-500">

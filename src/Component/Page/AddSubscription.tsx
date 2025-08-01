@@ -134,7 +134,7 @@ const AddSubscription = () => {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="Price">Charges/Month (₹)</Label>
+                  <Label htmlFor="Price">Charges/Month (€)</Label>
                   <Input
                     id="Price"
                     type="number"
