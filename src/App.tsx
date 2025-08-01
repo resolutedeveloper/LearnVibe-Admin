@@ -15,6 +15,7 @@ import MainLayout from "./Component/SmallComponents/MainLayout";
 import ProtectedRoute from "./Component/SmallComponents/ProtectedRoute";
 import RedirectIfAuthenticated from "./Component/SmallComponents/RedirectIfAuthenticated";
 import NotFound from "./Component/SmallComponents/NotFound";
+import SendOTP from "./Component/Page/SendOTP";
 function App() {
   return (
     <>
@@ -36,6 +37,7 @@ function App() {
             <Users />
           </MainLayout>
           } />
+          <Route path="/sendOTP" element={<SendOTP />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/newusers" element={
             <ProtectedRoute>

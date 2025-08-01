@@ -155,7 +155,7 @@ const Login = () => {
 
             <div className="text-right -mt-2">
               <Link
-                to="/forgotpassword"
+                to="/sendOTP"
                 className="text-sm text-blue-600 hover:underline"
               >
                 Forgot Password?
