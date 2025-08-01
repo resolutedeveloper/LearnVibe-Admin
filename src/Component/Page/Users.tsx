@@ -214,8 +214,8 @@ const Users = () => {
 
 
         <div className="flex flex-col sm:flex-col md:flex-row justify-between items-center gap-4 mt-4 mb-4 w-full flex-wrap">
-          <Pagination className="w-full md:w-fit justify-center md:justify-end">
-            <PaginationContent className="flex flex-wrap justify-center md:justify-end gap-1">
+          <Pagination className="w-full md:w-fit justify-start">
+            <PaginationContent className="flex flex-wrap justify-start gap-1">
               <PaginationItem>
                 <PaginationPrevious
                   href="#"
@@ -257,6 +257,7 @@ const Users = () => {
               </PaginationItem>
             </PaginationContent>
           </Pagination>
+
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-black">Rows per page:</span>
             <Select

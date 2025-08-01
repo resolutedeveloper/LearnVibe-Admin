@@ -11,6 +11,11 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { addSubscription, updateSubscriptionAPI } from "@/lib/api"
 import { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
+const RequiredLabel = ({ htmlFor, children }: { htmlFor: string, children: React.ReactNode }) => (
+  <Label htmlFor={htmlFor}>
+    {children} <span className="text-red-500">*</span>
+  </Label>
+);
 
 const AddSubscription = () => {
   const location = useLocation();
@@ -19,6 +24,8 @@ const AddSubscription = () => {
   const existingData = location.state?.data || null;
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
+  const [fieldErrors, setFieldErrors] = useState<{ [key: string]: string }>({});
+
   const [formData, setFormData] = useState(() => {
     if (existingData) return { ...existingData };
     return {
@@ -52,6 +59,7 @@ const AddSubscription = () => {
     e.preventDefault();
     setError("");
     setSuccess("");
+    setFieldErrors({});
 
     const requiredFields = [
       "SubscriptionTitle",
@@ -64,11 +72,19 @@ const AddSubscription = () => {
       "NumberOfQuest",
       "DifficultyLevels",
     ];
-    for (let field of requiredFields) {
-      if (!formData[field as keyof typeof formData]) {
-        setError("All fields are required.");
-        return;
+    const newFieldErrors: { [key: string]: string } = {};
+    requiredFields.forEach((field) => {
+      if (
+        formData[field as keyof typeof formData] === "" ||
+        formData[field as keyof typeof formData] === 0
+      ) {
+        newFieldErrors[field] = "This field is required.";
       }
+    });
+
+    if (Object.keys(newFieldErrors).length > 0) {
+      setFieldErrors(newFieldErrors);
+      return;
     }
     // console.log(formData.ID);
     const id = formData.ID;
@@ -115,7 +131,7 @@ const AddSubscription = () => {
       {/* <Sidebar /> */}
       <div className="flex-1">
         <div className="flex flex-wrap mb-5 gap-4">
-          <h2 className="text-2xl font-semibold">Add Subscription</h2>
+          <h2 className="text-2xl font-semibold">{editMode?"Update Subscription":"Add Subscription"}</h2>
         </div>
         <Card className="w-full shadow-sm rounded-sm">
           <CardHeader />
@@ -124,7 +140,7 @@ const AddSubscription = () => {
               {/* Left Side */}
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="SubscriptionTitle">Subscription Title</Label>
+                  <RequiredLabel htmlFor="SubscriptionTitle">Subscription Title</RequiredLabel>
                   <Input
                     id="SubscriptionTitle"
                     className="mt-3"
@@ -132,9 +148,13 @@ const AddSubscription = () => {
                     value={formData.SubscriptionTitle}
                     onChange={handleChange}
                   />
+                  {fieldErrors.SubscriptionTitle && (
+                    <p className="text-sm text-red-500">{fieldErrors.SubscriptionTitle}</p>
+                  )}
                 </div>
                 <div>
-                  <Label htmlFor="Price">Charges/Month (€)</Label>
+                  <RequiredLabel htmlFor="Price">Charges/Month (€)</RequiredLabel>
+                  {/* <Label htmlFor="Price">Charges/Month (€)</Label> */}
                   <Input
                     id="Price"
                     type="number"
@@ -142,9 +162,13 @@ const AddSubscription = () => {
                     value={formData.Price}
                     onChange={handleChange}
                   />
+                    {fieldErrors.Price && (
+                    <p className="text-sm text-red-500">{fieldErrors.Price}</p>
+                  )}
                 </div>
                 <div>
-                  <Label htmlFor="NumOfDocuments">Number of Documents Allowed</Label>
+                  <RequiredLabel htmlFor="NumOfDocuments">Number of Documents Allowed</RequiredLabel>
+                  {/* <Label htmlFor="NumOfDocuments">Number of Documents Allowed</Label> */}
                   <Input
                     id="NumOfDocuments"
                     type="number"
@@ -152,9 +176,13 @@ const AddSubscription = () => {
                     value={formData.NumOfDocuments}
                     onChange={handleChange}
                   />
+                    {fieldErrors.NumOfDocuments && (
+                    <p className="text-sm text-red-500">{fieldErrors.NumOfDocuments}</p>
+                  )}
                 </div>
                 <div>
-                  <Label htmlFor="NoOfPages">Pages Per Document</Label>
+                  {/* <Label htmlFor="NoOfPages">Pages Per Document</Label> */}
+                  <RequiredLabel htmlFor="NoOfPages">Pages Per Document</RequiredLabel>
                   <Input
                     id="NoOfPages"
                     type="number"
@@ -162,9 +190,13 @@ const AddSubscription = () => {
                     value={formData.NoOfPages}
                     onChange={handleChange}
                   />
+                    {fieldErrors.NoOfPages && (
+                    <p className="text-sm text-red-500">{fieldErrors.NoOfPages}</p>
+                  )}
                 </div>
                 <div>
-                  <Label htmlFor="Duration">Duration (Months)</Label>
+                  {/* <Label htmlFor="Duration">Duration (Months)</Label> */}
+                  <RequiredLabel htmlFor="Duration">Duration (Months)</RequiredLabel>
                   <Input
                     className="mt-3"
                     id="Duration"
@@ -172,12 +204,16 @@ const AddSubscription = () => {
                     value={formData.Duration}
                     onChange={handleChange}
                   />
+                    {fieldErrors.Duration && (
+                    <p className="text-sm text-red-500">{fieldErrors.Duration}</p>
+                  )}
                 </div>
               </div>
               {/* Right Side */}
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="AllowedFormats">Allowed Document Formats</Label>
+                  {/* <Label htmlFor="AllowedFormats">Allowed Document Formats</Label> */}
+                  <RequiredLabel htmlFor="AllowedFormats">Allowed Document Formats</RequiredLabel>
                   <Textarea
                     id="AllowedFormats"
                     className="mt-3"
@@ -185,9 +221,13 @@ const AddSubscription = () => {
                     value={formData.AllowedFormats}
                     onChange={handleChange}
                   />
+                    {fieldErrors.AllowedFormats && (
+                    <p className="text-sm text-red-500">{fieldErrors.AllowedFormats}</p>
+                  )}
                 </div>
                 <div>
-                  <Label htmlFor="NumOfQuiz">Allowed Number of Quizzes</Label>
+                  {/* <Label htmlFor="NumOfQuiz">Allowed Number of Quizzes</Label> */}
+                  <RequiredLabel htmlFor="NumOfQuiz">Allowed Number of Quizzes</RequiredLabel>
                   <Input
                     id="NumOfQuiz"
                     className="mt-3"
@@ -195,6 +235,9 @@ const AddSubscription = () => {
                     value={formData.NumOfQuiz}
                     onChange={handleChange}
                   />
+                    {fieldErrors.NumOfQuiz && (
+                    <p className="text-sm text-red-500">{fieldErrors.NumOfQuiz}</p>
+                  )}
                 </div>
                 {/* <div>
                   <Label htmlFor="NumberOfQuest">Questions Per Quiz</Label>
@@ -207,7 +250,8 @@ const AddSubscription = () => {
                   />
                 </div> */}
                 <div>
-                  <Label htmlFor="NumberOfQuest">Questions Per Quiz</Label>
+                  {/* <Label htmlFor="NumberOfQuest">Questions Per Quiz</Label> */}
+                  <RequiredLabel htmlFor="NumberOfQuest">Questions Per Quiz</RequiredLabel>
                   <Input
                     id="NumberOfQuest"
                     className="mt-3"
@@ -218,10 +262,14 @@ const AddSubscription = () => {
                     value={formData.NumberOfQuest}
                     onChange={handleChange}
                   />
+                    {fieldErrors.NumberOfQuest && (
+                    <p className="text-sm text-red-500">{fieldErrors.NumberOfQuest}</p>
+                  )}
                 </div>
 
                 <div>
-                  <Label htmlFor="DifficultyLevels">Allowed Difficulty Level</Label>
+                  {/* <Label htmlFor="DifficultyLevels">Allowed Difficulty Level</Label> */}
+                  <RequiredLabel htmlFor="DifficultyLevels">Allowed Difficulty Level</RequiredLabel>
                   <Textarea
                     id="DifficultyLevels"
                     className="mt-3"
@@ -229,6 +277,9 @@ const AddSubscription = () => {
                     value={formData.DifficultyLevels}
                     onChange={handleChange}
                   />
+                    {fieldErrors.DifficultyLevels && (
+                    <p className="text-sm text-red-500">{fieldErrors.DifficultyLevels}</p>
+                  )}
                 </div>
               </div>
 
@@ -242,6 +293,7 @@ const AddSubscription = () => {
                       setFormData((prev: any) => ({ ...prev, IsActive: Boolean(checked) }))
                     }}
                   />
+
                   <Label htmlFor="IsActive">Keep Active</Label>
                 </div>
 

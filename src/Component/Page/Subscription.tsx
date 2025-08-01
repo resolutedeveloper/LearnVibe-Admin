@@ -238,10 +238,10 @@ const Subscription = () => {
   };
   return (
     <div className="">
-      <div className="max-w-15xl mx-auto py-6">
+      <div className="max-w-15xl mx-auto ">
         {/* Header */}
         <div className="flex flex-wrap items-center justify-between mb-5 gap-4">
-          <h2 className="text-2xl font-semibold">Subscription Details</h2>
+          <h2 className="text-2xl font-semibold">Subscription List</h2>
           <Link to="/addsubscription">
             <Button className="bg-[rgb(134,70,244)] text-white flex items-center gap-2 font-normal rounded-sm">
               <Plus className="w-4 h-4" />
@@ -256,7 +256,7 @@ const Subscription = () => {
             <Table className="text-left text-sm min-w-[900px]">
               <TableHeader className="">
                 <TableRow className="bg-gray-200 hover:bg-gray-200">
-                  <TableHead className="py-5 px-3">#</TableHead>
+                  <TableHead className="py-5 px-6">#</TableHead>
                   <TableHead className="py-5 px-0">Subscription<br />Title</TableHead>
                   <TableHead className="py-5 px-0">Charges<br />Month</TableHead>
                   <TableHead className="py-5 px-0">Documents<br />Allowed</TableHead>
