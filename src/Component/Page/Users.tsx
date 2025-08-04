@@ -154,7 +154,7 @@ const Users = () => {
               onClick={() => {
                 setCurrentPage(1);
                 GetUsers(1, usersPerPage);
-                setSearchQuery(""); // Only clear after a real search
+                // setSearchQuery("")
               }}
               // disabled={!searchQuery.trim()}
               className={`bg-[rgb(134,70,244)] text-white rounded-sm px-4 

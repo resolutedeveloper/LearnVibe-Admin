@@ -16,7 +16,8 @@ export const passwordCriteria = [
   { label: "Minimum 1 Special Character", check: (pwd: string) => /[^A-Za-z0-9]/.test(pwd) },
   { label: "Minimum 1 Number", check: (pwd: string) => /[0-9]/.test(pwd) },
 ];
-const PasswordStrengthChecker = (password: any) => {
+// FIX: Accept props correctly
+const PasswordStrengthChecker = ({ password }: { password: string }) => {
   return (
     <div className="grid gap-1 text-sm text-gray-600 mt-2">
       {passwordCriteria.map((criterion, index) => {
@@ -35,6 +36,7 @@ const PasswordStrengthChecker = (password: any) => {
     </div>
   );
 };
+
 const NewUsers = ({ isUpdate = false }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

@@ -299,28 +299,28 @@ const AddSubscription = () => {
                       type="button"
                       className="bg-gray-400 rounded-sm cursor-pointer"
                       onClick={() => {
-                        setFormData({
-                          SubscriptionTitle: "",
-                          IsFree: false,
-                          Price: 0,
-                          Duration: 0,
-                          NumOfDocuments: 0,
-                          NoOfPages: 0,
-                          NumOfQuiz: 0,
-                          AllowedFormats: "",
-                          NumberOfQuest: "",
-                          DifficultyLevels: "",
-                          IsActive: false,
-                          IsDefault: true,
-                          SubscriptionPriority: 1,
-                        })
-                        setError("")
-                        setSuccess("")
+                        // setFormData({
+                        //   SubscriptionTitle: "",
+                        //   IsFree: false,
+                        //   Price: 0,
+                        //   Duration: 0,
+                        //   NumOfDocuments: 0,
+                        //   NoOfPages: 0,
+                        //   NumOfQuiz: 0,
+                        //   AllowedFormats: "",
+                        //   NumberOfQuest: "",
+                        //   DifficultyLevels: "",
+                        //   IsActive: false,
+                        //   IsDefault: true,
+                        //   SubscriptionPriority: 1,
+                        // })
+                        // setError("")
+                        // setSuccess("")
+                        navigate("/subscription")
                       }}
                     >
                       Cancel
                     </Button>
-
                     <Button type="submit" className="bg-[rgb(134,70,244)] rounded-sm cursor-pointer">Submit</Button>
                   </div>
                 </div>
