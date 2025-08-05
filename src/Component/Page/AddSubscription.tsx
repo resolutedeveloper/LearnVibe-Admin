@@ -39,7 +39,7 @@ const AddSubscription = () => {
       NumOfQuiz: 0,
       AllowedFormats: "",
       NumberOfQuest: "",
-      DifficultyLevels: "",
+      DifficultyLevels: "Hard",
       IsActive: false,
       IsDefault: true,
       SubscriptionPriority: 1,
@@ -97,6 +97,7 @@ const AddSubscription = () => {
       NumOfDocuments: parseInt(formData.NumOfDocuments.toString()),
       NoOfPages: parseInt(formData.NoOfPages.toString()),
       NumOfQuiz: parseInt(formData.NumOfQuiz.toString()),
+      NumberOfQuest: parseInt(formData.NumberOfQuest.toString()),
       SubscriptionPriority: parseInt(formData.SubscriptionPriority.toString()),
     };
 
@@ -107,11 +108,14 @@ const AddSubscription = () => {
 
       if (res.status === "success") {
         setSuccess(`Subscription ${editMode ? "updated" : "added"} successfully.`);
+        setTimeout(() => navigate("/subscription"), 1500);
       } else {
-        setError(res.message || `Failed to ${editMode ? "update" : "add"} subscription.`);
+        // console.log(res.response.data.message);
+
+        setError(res.response.data.message || `Failed to ${editMode ? "update" : "add"} subscription.`);
       }
 
-      setTimeout(() => navigate("/subscription"), 1500);
+
     } catch (err) {
       setError(`Failed to ${editMode ? "update" : "add"} subscription. Please try again.`);
     } finally {
@@ -188,6 +192,10 @@ const AddSubscription = () => {
                     <p className="text-sm text-red-500">{fieldErrors.NoOfPages}</p>
                   )} */}
                 </div>
+
+              </div>
+              {/* Right Side */}
+              <div className="space-y-4">
                 <div>
                   <Label htmlFor="Duration">Duration (Months)</Label>
                   {/* <RequiredLabel htmlFor="Duration">Duration (Months)</RequiredLabel> */}
@@ -202,9 +210,6 @@ const AddSubscription = () => {
                     <p className="text-sm text-red-500">{fieldErrors.Duration}</p>
                   )} */}
                 </div>
-              </div>
-              {/* Right Side */}
-              <div className="space-y-4">
                 <div>
                   {/* <Label htmlFor="AllowedFormats">Allowed Document Formats</Label> */}
                   <RequiredLabel htmlFor="AllowedFormats">Allowed Document Formats</RequiredLabel>
@@ -249,20 +254,35 @@ const AddSubscription = () => {
                   <Input
                     id="NumberOfQuest"
                     className="mt-3"
-                    type="text"
+                    type="number"
                     min={1}
+                    max={50}
                     step={1}
-                    placeholder="e.g. 10,20,30"
+                    placeholder="e.g. 10"
                     value={formData.NumberOfQuest}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (value === "") {
+                        handleChange(e);
+                        return;
+                      }
+
+                      // Allow only positive integers
+                      const intValue = parseInt(value, 10);
+                      if (!isNaN(intValue) && intValue >= 1 && intValue <= 50) {
+                        handleChange(e);
+                      }
+                    }}
+                    onWheel={(e) => e.currentTarget.blur()} // prevent scroll value change
                   />
+
                   {fieldErrors.NumberOfQuest && (
                     <p className="text-sm text-red-500">{fieldErrors.NumberOfQuest}</p>
                   )}
                 </div>
 
-                <div>
-                  {/* <Label htmlFor="DifficultyLevels">Allowed Difficulty Level</Label> */}
+                {/* <div>
+                
                   <RequiredLabel htmlFor="DifficultyLevels">Allowed Difficulty Level</RequiredLabel>
                   <Textarea
                     id="DifficultyLevels"
@@ -274,7 +294,7 @@ const AddSubscription = () => {
                   {fieldErrors.DifficultyLevels && (
                     <p className="text-sm text-red-500">{fieldErrors.DifficultyLevels}</p>
                   )}
-                </div>
+                </div> */}
               </div>
 
               {/* Controls */}
