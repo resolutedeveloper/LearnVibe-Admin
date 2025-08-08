@@ -2,15 +2,13 @@
 "use client";
 import { useState } from "react";
 import Sidebar from "../Page/Sidebar";
-import { Menu } from "lucide-react"; // for hamburger icon
-
+import { Menu } from "lucide-react";
 interface MainLayoutProps {
     children: React.ReactNode;
 }
 
 const MainLayout = ({ children }: MainLayoutProps) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
     return (
         <div className="flex h-screen w-full">
             {/* Sidebar (hidden on small screens unless toggled) */}
@@ -24,7 +22,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
                     </button>
                 </header>
                 <main className="flex-1 overflow-auto p-6 bg-gray-50">
-                    <div className="max-w-7xl mx-auto">{children}</div>
+                    <div className="max-w-15xl mx-auto">{children}</div>
                 </main>
             </div>
         </div>

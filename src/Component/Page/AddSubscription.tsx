@@ -26,7 +26,6 @@ const AddSubscription = () => {
   const [success, setSuccess] = useState("")
   const [fieldErrors, setFieldErrors] = useState<{ [key: string]: string }>({});
   const [loading, setLoading] = useState(false);
-
   const [formData, setFormData] = useState(() => {
     if (existingData) return { ...existingData };
     return {
@@ -53,23 +52,19 @@ const AddSubscription = () => {
       [id]: id === "AllowedFormats" ? value.toUpperCase() : finalValue,
     }))
   }
-
   const token = localStorage.getItem("AdminToken") || ""
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setSuccess("");
     setFieldErrors({});
     setLoading(true); // Start loading
-
     const requiredFields = [
       "SubscriptionTitle",
       "AllowedFormats",
       "NumberOfQuest",
       "DifficultyLevels",
     ];
-
     const newFieldErrors: { [key: string]: string } = {};
     requiredFields.forEach((field) => {
       if (
@@ -79,13 +74,11 @@ const AddSubscription = () => {
         newFieldErrors[field] = "This field is required.";
       }
     });
-
     if (Object.keys(newFieldErrors).length > 0) {
       setFieldErrors(newFieldErrors);
       setLoading(false);
       return;
     }
-
     const id = formData.ID;
     const {
       ID,
@@ -100,7 +93,6 @@ const AddSubscription = () => {
       NumberOfQuest: parseInt(formData.NumberOfQuest.toString()),
       SubscriptionPriority: parseInt(formData.SubscriptionPriority.toString()),
     };
-
     try {
       const res = editMode
         ? await updateSubscriptionAPI(id, payload, token)
@@ -111,19 +103,14 @@ const AddSubscription = () => {
         setTimeout(() => navigate("/subscription"), 1500);
       } else {
         // console.log(res.response.data.message);
-
         setError(res.response.data.message || `Failed to ${editMode ? "update" : "add"} subscription.`);
       }
-
-
     } catch (err) {
       setError(`Failed to ${editMode ? "update" : "add"} subscription. Please try again.`);
     } finally {
       setLoading(false); // Stop loading
     }
   };
-
-
   return (
     <div className="flex ">
       {/* <Sidebar /> */}
@@ -192,7 +179,6 @@ const AddSubscription = () => {
                     <p className="text-sm text-red-500">{fieldErrors.NoOfPages}</p>
                   )} */}
                 </div>
-
               </div>
               {/* Right Side */}
               <div className="space-y-4">
@@ -266,7 +252,6 @@ const AddSubscription = () => {
                         handleChange(e);
                         return;
                       }
-
                       // Allow only positive integers
                       const intValue = parseInt(value, 10);
                       if (!isNaN(intValue) && intValue >= 1 && intValue <= 50) {
@@ -275,14 +260,11 @@ const AddSubscription = () => {
                     }}
                     onWheel={(e) => e.currentTarget.blur()} // prevent scroll value change
                   />
-
                   {fieldErrors.NumberOfQuest && (
                     <p className="text-sm text-red-500">{fieldErrors.NumberOfQuest}</p>
                   )}
                 </div>
-
-                {/* <div>
-                
+                {/* <div
                   <RequiredLabel htmlFor="DifficultyLevels">Allowed Difficulty Level</RequiredLabel>
                   <Textarea
                     id="DifficultyLevels"
@@ -296,7 +278,6 @@ const AddSubscription = () => {
                   )}
                 </div> */}
               </div>
-
               {/* Controls */}
               <div className="md:col-span-2 flex flex-col md:flex-row items-start justify-between mt-4 gap-4">
                 <div className="flex items-center space-x-2">
@@ -307,10 +288,8 @@ const AddSubscription = () => {
                       setFormData((prev: any) => ({ ...prev, IsActive: Boolean(checked) }))
                     }}
                   />
-
                   <Label htmlFor="IsActive">Keep Active</Label>
                 </div>
-
                 <div className="flex flex-col gap-2 md:items-end">
                   {error && <p className="text-red-600 text-sm">{error}</p>}
                   {success && <p className="text-green-600 text-sm">{success}</p>}
@@ -319,23 +298,6 @@ const AddSubscription = () => {
                       type="button"
                       className="bg-gray-400 rounded-sm cursor-pointer"
                       onClick={() => {
-                        // setFormData({
-                        //   SubscriptionTitle: "",
-                        //   IsFree: false,
-                        //   Price: 0,
-                        //   Duration: 0,
-                        //   NumOfDocuments: 0,
-                        //   NoOfPages: 0,
-                        //   NumOfQuiz: 0,
-                        //   AllowedFormats: "",
-                        //   NumberOfQuest: "",
-                        //   DifficultyLevels: "",
-                        //   IsActive: false,
-                        //   IsDefault: true,
-                        //   SubscriptionPriority: 1,
-                        // })
-                        // setError("")
-                        // setSuccess("")
                         navigate("/subscription")
                       }}
                     >
